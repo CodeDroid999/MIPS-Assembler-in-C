@@ -1,0 +1,16 @@
+00400000: <main> ; <input:6> main:
+; UNRECOGNIZED INSTRUCTION ; <input:8> li $v0,4 # Code for syscall: print_string
+00400000: 240400c0 ; <input:9> la $a0, msg # Pointer to string (load the address of msg)
+00400004: 00042400 ; <input:9> la $a0, msg # Pointer to string (load the address of msg)
+00400008: 24840000 ; <input:9> la $a0, msg # Pointer to string (load the address of msg)
+0040000c: 0000000c ; <input:10> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:11> li $v0,10 # Code for syscall: exit
+00400010: 0000000c ; <input:12> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:16> s
+;
+; DATA IN MEMORY
+; msg
+00c00000: 48656c6c ; Hell
+00c00004: 6f20576f ; o Wo
+00c00008: 726c6421 ; rld!
+00c0000c: 0a000000 ; \n

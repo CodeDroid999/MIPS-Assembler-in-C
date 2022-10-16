@@ -1,0 +1,58 @@
+00400000: <main> ; <input:8> main:
+; UNRECOGNIZED INSTRUCTION ; <input:15> li $v0,4 # print_string syscall code = 4
+00400000: 240400c0 ; <input:16> la $a0, msg1
+00400004: 00042400 ; <input:16> la $a0, msg1
+00400008: 24840000 ; <input:16> la $a0, msg1
+0040000c: 0000000c ; <input:17> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:20> li $v0,5 # read_int syscall code = 5
+00400010: 0000000c ; <input:21> syscall
+00400014: 00028020 ; <input:22> move $s0,$v0 # syscall results returned in $v0
+00400018: 20110000 ; <input:25> li $s1, 0 # Reg $s1 = counter (i)
+0040001c: 20120000 ; <input:26> li $s2, 0 # Reg $s2 = sum
+00400020: <loop> ; <input:29> loop: addi $s1, $s1, 1 # i = i + 1
+00400020: 22310001 ; <input:29> loop: addi $s1, $s1, 1 # i = i + 1
+00400024: 00122020 ; <input:32> move $a0, $s2 # Argument 1: sum ($s2)
+00400028: 00112820 ; <input:33> move $a1, $s1 # Argument 2: i ($s1)
+0040002c: 0c10001b ; <input:34> jal add2 # Save current PC in $ra, and jump to add2
+00400030: 00029020 ; <input:35> move $s2,$v0 # Return value saved in $v0. This is sum ($s2)
+00400034: 12110001 ; <input:36> beq $s0, $s1, exit # if i = N, continue
+00400038: 08100008 ; <input:37> j loop
+0040003c: <exit> ; <input:40> exit: li $v0, 4 # print_string syscall code = 4
+0040003c: 20020004 ; <input:40> exit: li $v0, 4 # print_string syscall code = 4
+00400040: 240400c0 ; <input:41> la $a0, msg2
+00400044: 00042400 ; <input:41> la $a0, msg2
+00400048: 2484001c ; <input:41> la $a0, msg2
+0040004c: 0000000c ; <input:42> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:45> li $v0,1 # print_string syscall code = 4
+00400050: 00122020 ; <input:46> move $a0, $s2
+00400054: 0000000c ; <input:47> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:50> li $v0,4 # print_string syscall code = 4
+00400058: 240400c0 ; <input:51> la $a0, lf
+0040005c: 00042400 ; <input:51> la $a0, lf
+00400060: 24840024 ; <input:51> la $a0, lf
+00400064: 0000000c ; <input:52> syscall
+; UNRECOGNIZED INSTRUCTION ; <input:53> li $v0,10 # exit
+00400068: 0000000c ; <input:54> syscall
+0040006c: <add2> ; <input:71> add2: # Store registers on the stack that we will overwrite (just $s0)
+0040006c: 20000000 ; <input:72> addi $sp,$sp, -4 # Adjust stack pointer
+00400070: afb00000 ; <input:73> sw $s0,0($sp) # Save $s0 on the stack
+00400074: 00858020 ; <input:76> add $s0,$a0,$a1 # Sum = sum + i
+00400078: 00101020 ; <input:79> move $v0,$s0
+0040007c: 8fb00000 ; <input:82> lw $s0,0($sp)
+00400080: 20000000 ; <input:83> addi $sp,$sp,4 # Adjust stack pointer
+00400084: 03e00008 ; <input:86> jr $ra # Jump to addr stored in $ra
+;
+; DATA IN MEMORY
+; msg1
+00c00000: 4e756d62 ; Numb
+00c00004: 6572206f ; er o
+00c00008: 6620696e ; f in
+00c0000c: 74656765 ; tege
+00c00010: 72732028 ; rs (
+00c00014: 4e293f20 ; N)?
+00c00018: 20000000 ;
+; msg2
+00c0001c: 53756d20 ; Sum
+00c00020: 3d200000 ; =
+; lf
+00c00024: 0a000000 ; \n

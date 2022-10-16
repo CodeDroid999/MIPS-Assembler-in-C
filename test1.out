@@ -1,0 +1,10 @@
+00400000: <main> ; <input:5> main:
+00400000: 200a0019 ; <input:6> li $t2, 25 # Load immediate value (25)
+00400004: 8c000000 ; <input:7> lw $t3, value # Load the word stored in value (see bottom)
+00400008: 014b6020 ; <input:8> add $t4, $t2, $t3 # Add
+0040000c: 014b6822 ; <input:9> sub $t5, $t2, $t3 # Subtract
+00400010: ac000000 ; <input:10> sw $t5, Z #Store the answer in Z (declared at the bottom)
+00400014: 2002000a ; <input:12> li $v0, 10 # Sets $v0 to "10" to select exit syscall
+00400018: 0000000c ; <input:13> syscall # Exit
+; UNRECOGNIZED INSTRUCTION ; <input:18> value: .word 12
+; UNRECOGNIZED INSTRUCTION ; <input:19> Z: .word 0
